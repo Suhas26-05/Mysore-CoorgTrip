@@ -226,6 +226,35 @@
   .alert li{padding-left:17px;position:relative;font-size:.88rem;color:var(--cream-dim);margin-bottom:6px;font-weight:300}
   .alert li::before{content:"–";position:absolute;left:0;color:var(--amber)}
 
+  /* ---------- FEEDBACK ---------- */
+  .feedback-shell{
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.72fr);gap:18px;
+    align-items:stretch;
+  }
+  .feedback-card{
+    border:1px solid var(--line);border-radius:var(--radius);padding:26px;
+    background:linear-gradient(145deg,rgba(28,89,67,.38),rgba(255,255,255,.035));
+  }
+  .feedback-card h3{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:600;color:var(--amber-soft);margin-bottom:8px}
+  .feedback-card p{color:var(--cream-dim);font-size:.88rem;font-weight:300}
+  .feedback-form{display:grid;gap:14px;margin-top:20px}
+  .feedback-form label{display:grid;gap:6px;color:var(--amber-soft);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+  .feedback-form input,.feedback-form select,.feedback-form textarea{
+    width:100%;border:1px solid rgba(240,201,135,.28);border-radius:10px;padding:12px 13px;
+    background:rgba(10,26,21,.5);color:var(--cream);font:400 .88rem 'Inter',sans-serif;outline:none;
+    transition:border-color .2s,background .2s;
+  }
+  .feedback-form textarea{min-height:118px;resize:vertical}
+  .feedback-form input::placeholder,.feedback-form textarea::placeholder{color:rgba(207,199,184,.62)}
+  .feedback-form input:focus,.feedback-form select:focus,.feedback-form textarea:focus{border-color:var(--amber);background:rgba(10,26,21,.75)}
+  .feedback-form select option{background:var(--forest);color:var(--cream)}
+  .feedback-submit{justify-self:start;margin-top:2px;background:var(--amber);color:var(--ink);border:0;border-radius:999px;padding:12px 22px;font:700 .84rem 'Inter',sans-serif;letter-spacing:.04em;cursor:pointer;transition:.2s}
+  .feedback-submit:hover{background:var(--amber-soft);transform:translateY(-1px)}
+  .feedback-note{align-self:center;padding:24px;border-left:2px solid var(--amber);background:rgba(224,164,88,.08)}
+  .feedback-note strong{display:block;font-family:'Fraunces',serif;font-size:1.15rem;color:var(--amber-soft);margin-bottom:8px}
+  .feedback-note p{color:var(--cream-dim);font-size:.86rem;font-weight:300}
+  .feedback-honeypot{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+
   footer{padding:46px 0 60px;border-top:1px solid var(--line);text-align:center}
   footer p{color:var(--cream-dim);font-size:.82rem;font-weight:300}
   .print-btn{
@@ -275,6 +304,8 @@
     .card{padding:20px}
     th,td{padding:12px 14px;font-size:.86rem}
     .check{padding:14px}
+    .feedback-shell{grid-template-columns:1fr}
+    .feedback-card,.feedback-note{padding:20px}
   }
 
   /* touch devices latch :hover after a tap — neutralise it */
@@ -284,6 +315,7 @@
     .check:hover{background:rgba(255,255,255,.035)}
     tbody tr:hover{background:transparent}
     .print-btn:hover{transform:none;background:var(--amber)}
+    .feedback-submit:hover{transform:none;background:var(--amber)}
     .navlinks a:hover{color:var(--cream-dim);background:transparent}
     .navlinks a:active{color:var(--ink);background:var(--amber)}
   }
@@ -313,6 +345,7 @@
       <a href="#budget">Budget</a>
       <a href="#pack">Pack</a>
       <a href="#book">Book</a>
+      <a href="#feedback">Feedback</a>
     </div>
   </div>
 </nav>
@@ -619,6 +652,45 @@
         <li>Mysuru Palace illumination timings &mdash; usually Sunday evenings, 7:00&ndash;7:45 PM</li>
       </ul>
       <p style="margin-top:12px;font-size:.86rem;color:var(--cream-dim);font-weight:300">A single phone call to your homestay host two days out will confirm most of this list.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEEDBACK ===== -->
+<section id="feedback">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">07 &mdash; Field Notes</div>
+      <h2>Leave Some Feedback</h2>
+      <p class="sec-sub">Tell us what to sharpen before the wheels roll. Your note goes straight to the trip organiser.</p>
+    </div>
+    <div class="feedback-shell">
+      <div class="feedback-card">
+        <h3>How does the plan feel?</h3>
+        <p>A quick signal now helps us tune the pace, stays, and stops for everyone.</p>
+        <form class="feedback-form" action="https://formsubmit.co/zoro123753@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Mysuru + Coorg trip feedback" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <div class="feedback-honeypot" aria-hidden="true">
+            <label>Leave this empty<input type="text" name="_honey" tabindex="-1" autocomplete="off" /></label>
+          </div>
+          <label>Your name<input type="text" name="name" autocomplete="name" placeholder="Who is checking in?" required /></label>
+          <label>Your email<input type="email" name="email" autocomplete="email" placeholder="you@example.com" required /></label>
+          <label>Trip pulse<select name="trip_pulse" required>
+            <option value="" disabled selected>Choose one</option>
+            <option>Feels great as-is</option>
+            <option>Looks good, with a few tweaks</option>
+            <option>Needs a rethink</option>
+          </select></label>
+          <label>Your note<textarea name="feedback" placeholder="What should we add, remove, or rethink?" required></textarea></label>
+          <button class="feedback-submit" type="submit">Send feedback &rarr;</button>
+        </form>
+      </div>
+      <aside class="feedback-note">
+        <strong>Small notes make better trips.</strong>
+        <p>Share concerns about timing, accessibility, food, budget, or anything that would make the four days feel more like yours.</p>
+      </aside>
     </div>
   </div>
 </section>
